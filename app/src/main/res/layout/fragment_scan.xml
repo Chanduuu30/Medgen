@@ -1,28 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="16dp">
 
-    <!-- Camera button at the top -->
+    <!-- Camera Scan Button at the top -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnCamera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_scan"
-        android:contentDescription="Camera"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="16dp" />
+        android:contentDescription="Scan with Camera"
+        android:layout_gravity="center"
+        android:tint="@color/white"
+        android:backgroundTint="@color/primaryColor"
+        android:layout_marginBottom="24dp" />
 
-    <!-- Placeholder scan UI -->
+    <!-- Instruction text -->
     <TextView
         android:id="@+id/scanText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Scan your prescription or medicine"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_marginBottom="20dp" />
+
+    <!-- AI Result Section -->
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Result will appear here after scanning."
+        android:textSize="16sp"
+        android:textColor="@color/text_dark"
+        android:gravity="center"
+        android:padding="12dp"
+        android:background="@drawable/bg_result_box"
+        android:layout_marginBottom="20dp" />
+
+    <!-- Change Language Button -->
+    <Button
+        android:id="@+id/btnChangeLang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scan your prescription or your medicine here"
-        android:textSize="18sp"
+        android:text="Change Language"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/primaryColor"
         android:textColor="@color/text_dark"
-        android:layout_centerInParent="true" />
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp" />
 
-</RelativeLayout>
+</LinearLayout>
