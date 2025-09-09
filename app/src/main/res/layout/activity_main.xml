@@ -38,8 +38,8 @@
         android:layout_height="60dp"
         android:text="GET STARTED"
         android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/primary_teal"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/primaryColor"
         android:textStyle="bold" />
 
 </LinearLayout>
