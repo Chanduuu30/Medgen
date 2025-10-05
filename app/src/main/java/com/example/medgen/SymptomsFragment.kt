@@ -8,14 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import com.example.medgen.data.HistoryDatabase
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.launch
 import java.util.*
+
+
 
 class SymptomsFragment : Fragment() {
 
     private lateinit var symptomInput: EditText
+    private lateinit var symptomResult: TextView
     private val REQUEST_CODE_SPEECH = 100
 
     override fun onCreateView(
@@ -26,8 +33,11 @@ class SymptomsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_symptoms, container, false)
 
         symptomInput = view.findViewById(R.id.symptomInput)
-        val micBtn: ImageButton = view.findViewById(R.id.btnMic)
+        symptomResult = view.findViewById(R.id.symptomResult)
+        val micBtn: FloatingActionButton = view.findViewById(R.id.btnMic)
         val submitBtn: Button = view.findViewById(R.id.btnSubmitSymptoms)
+
+        val historyDao = HistoryDatabase.getDatabase(requireContext()).historyDao()
 
         // Handle mic input
         micBtn.setOnClickListener {
@@ -48,8 +58,18 @@ class SymptomsFragment : Fragment() {
             if (symptoms.isEmpty()) {
                 Toast.makeText(requireContext(), "Please enter or speak symptoms", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(requireContext(), "Symptoms submitted:\n$symptoms", Toast.LENGTH_LONG).show()
-                // TODO: send to AI/Server for diagnosis
+                symptomResult.text = "You entered: $symptoms"
+
+                // ✅ Save to local DB
+                lifecycleScope.launch {
+                    val history = History(
+                        type = "symptom",
+                        inputText = symptoms,
+                        resultText = "User symptoms recorded",
+                        timestamp = System.currentTimeMillis()
+                    )
+                    historyDao.insert(history)
+                }
             }
         }
 

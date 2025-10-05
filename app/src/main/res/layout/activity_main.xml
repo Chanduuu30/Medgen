@@ -36,10 +36,10 @@
         android:id="@+id/btnGetStarted"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:backgroundTint="@color/primaryColor"
         android:text="GET STARTED"
         android:textAllCaps="true"
         android:textColor="@color/black"
-        android:backgroundTint="@color/primaryColor"
         android:textStyle="bold" />
 
 </LinearLayout>
